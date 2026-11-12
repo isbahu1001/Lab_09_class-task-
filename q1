@@ -1,0 +1,46 @@
+
+#include <stdio.h>
+#include <string.h>
+
+int main()
+{
+    char feedback[200];
+    char updated[400];
+    char part[2];
+
+    printf("Enter customer feedback: ");
+    fgets(feedback, sizeof(feedback), stdin);
+
+    feedback[strcspn(feedback, "\n")] = '\0';
+
+    printf("\nTotal characters: %d", strlen(feedback));
+
+    if (strstr(feedback, "bad") != NULL)
+        printf("\nThe word bad exists.");
+
+    if (strstr(feedback, "good") != NULL)
+        printf("\nThe word good exists.");
+
+    strcpy(updated, "");
+
+    for (int i = 0; feedback[i] != '\0'; i++)
+    {
+        if (feedback[i] == 'b' &&
+            feedback[i+1] == 'a' &&
+            feedback[i+2] == 'd')
+        {
+            strcat(updated, "not good");
+            i = i + 2;
+        }
+        else
+        {
+            part[0] = feedback[i];
+            part[1] = '\0';
+            strcat(updated, part);
+        }
+    }
+
+    printf("\nUpdated feedback: %s", updated);
+
+    return 0;
+}
